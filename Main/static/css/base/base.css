@@ -1,0 +1,21 @@
+.blockOverlay{
+    opacity: 0.09 !important;
+}
+.blockMsg{
+    left:46% !important;
+    padding: 25px 12px!important;
+    width: unset!important;
+
+}
+.blockMsg h1{
+    font-size: 25px!important;
+    margin-top: 25px!important;
+    line-height: 0px!important;
+    color: unset!important;
+}
+.main-navbar{
+    background: #0062cc;
+}
+.main-logo{
+    height: 50px;
+}

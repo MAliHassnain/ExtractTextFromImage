@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<style>
+    #byLocal div {
+        position: relative;
+        overflow: hidden;
+    }
+
+    #byLocal input {
+        position: absolute;
+        font-size: 50px;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+
+    #byUrl .input-group-text {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    #selecedImageName{
+        margin-bottom: 0rem!important;
+        font-size: 14px;
+        color: cornflowerblue;
+    }
+</style>
+{% csrf_token %}
+<div class="row">
+    <div class="col-lg-12 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                <ul class="nav nav-tabs nav-fill" id="imageUploadTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="bylocal-tab" data-toggle="tab" href="#byLocal" role="tab"
+                            aria-controls="home" aria-selected="true"><i class="fa fa-upload"></i> Upload an Image</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="byUrl-tab" data-toggle="tab" href="#byUrl" role="tab"
+                            aria-controls="profile" aria-selected="false"><i class="fa fa-paste"></i> Paste Image
+                            URL</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="imageUploadTab">
+                    <div class="py-4 tab-pane fade show active text-center" id="byLocal" role="tabpanel"
+                        aria-labelledby="bylocal-tab">
+                        <p id="selecedImageName"></p>
+                        <div class="file btn btn-outline-primary">
+                            Browse an Image
+                            <input id="imageFileInput" onchange="ImageHelper.ChangeImage(this)" type="file" accept="image/*" />
+                        </div>
+                        <button class="btn btn-primary" onclick="ImageHelper.UploadImage()" > Proceed </button>
+                        <button class="btn btn-light" onclick="ImageHelper.ResetImageForm(1)" > Reset </button>
+                    </div>
+                    <div class="py-4 tab-pane fade" id="byUrl" role="tabpanel" aria-labelledby="byUrl-tab">
+                        <div class="input-group mb-3">
+                            <input id="imageURLInput" type="text" class="form-control" placeholder="Image URL" aria-label="Image URL"
+                                aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text btn btn-primary" onclick="ImageHelper.ProceedImageUrl()" id="basic-addon2"> Proceed </span>
+                                
+                            </div>
+                            &nbsp;<button onclick="ImageHelper.ResetImageForm(2)" class="btn btn-light" > Reset </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card d-none" id="extractResultDiv">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="alert alert-primary" role="alert">
+                                        Select Image.
+                                      </div>
+                                    <img width="100%" id="selectedImage" src="" class="img-responsive">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="alert alert-primary" role="alert">
+                                        Extracted Text from Image.
+                                      </div>
+                                    <div id=extractedText>Extracted text will be here after proceed.</div>
+                                </div> 
+                            </div>
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static "js/imagehelper/imagehelper.js" %}"></script>
+{% endblock %}
